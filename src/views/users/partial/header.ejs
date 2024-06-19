@@ -1,10 +1,5 @@
 <!-- Bổ sung một div cho alert -->
-<div id="alertMessage" style="display: none;" class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative max-w-6xl mx-auto mt-4">
-    <span class="block sm:inline">Bạn đã đăng nhập thành công!</span>
-    <span class="absolute top-0 bottom-0 right-0 px-4 py-3">
-        <svg onclick="closeAlert()" class="fill-current h-6 w-6 text-green-500 cursor-pointer" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M14.348 14.849c-0.469 0.469-1.229 0.469-1.697 0l-2.651-2.651-2.651 2.651c-0.469 0.469-1.229 0.469-1.697 0s-0.469-1.229 0-1.697l2.651-2.651-2.651-2.651c-0.469-0.469-0.469-1.229 0-1.697s1.229-0.469 1.697 0l2.651 2.651 2.651-2.651c0.469-0.469 1.229-0.469 1.697 0s0.469 1.229 0 1.697l-2.651 2.651 2.651 2.651c0.469 0.469 0.469 1.229 0 1.697z"></path></svg>
-    </span>
-</div>
+
 
 <header class="bg-blue-600 text-white py-6">
     <div class="max-w-6xl mx-auto flex justify-between items-center px-6">
@@ -25,43 +20,3 @@
         
     </div>
 </header>
-
-<script>
-    // Function to show the alert when login is successful
-    function showLoginAlert() {
-        document.getElementById('alertMessage').style.display = 'block';
-        setTimeout(function() {
-            document.getElementById('alertMessage').style.display = 'none';
-        }, 5000); // Hide alert after 5 seconds
-    }
-
-    // Function to switch from login to logout link
-    function switchToLogout() {
-        document.getElementById('login-link').style.display = 'none';
-        document.getElementById('logout-link').style.display = 'inline-block';
-    }
-
-    // Function to switch from logout to login link
-    function switchToLogin() {
-        document.getElementById('logout-link').style.display = 'none';
-        document.getElementById('login-link').style.display = 'inline-block';
-    }
-
-    // Example function for handling login process
-    function handleLogin() {
-        // Assume login successful, show alert and switch link
-        showLoginAlert();
-        switchToLogout();
-    }
-
-    // Example function for handling logout process
-    function handleLogout() {
-        // Perform logout actions, then switch link
-        switchToLogin();
-    }
-
-    // Example function to close the alert message
-    function closeAlert() {
-        document.getElementById('alertMessage').style.display = 'none';
-    }
-</script>
