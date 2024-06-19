@@ -29,16 +29,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.json());
 
-app.use(session({
-    secret: '123123', // Replace with your own secret key
-    resave: false,
-    saveUninitialized: false,
-    cookie: {
-        httpOnly: true,
-        secure: true,
-        maxAge: 60 * 60 * 1000 // 1 hour
-    }
-}));
 app.get('/', (req, res) => {
     res.render('users/index');  
 });

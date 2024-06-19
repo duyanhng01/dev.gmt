@@ -6,6 +6,14 @@ const router = express.Router();
 router.post('/login', authControllers.login) ;
 router.get('/logout', authControllers.logout);
 
+ const protectedRoute = (req, res, next) => {
+  if (!req.session.userData) {
+      return res.redirect('/');
+  }
+req.locals.userData=req.session.userData;
+  next();
+};
+
 
 // Route for initiating Google OAuth authentication
 router.get('/auth/google', passport.authenticate('google', { scope: ['profile', 'email'] }));
@@ -26,14 +34,11 @@ router.get('/auth/facebook/callback',
     res.redirect('/submit_ticket');
   }
 );
-router.get('/profile', (req, res) => {
-  if (!req.user) {
-    // Handle cases where user is not authenticated
-    res.redirect('/login'); // Redirect to login page or handle as appropriate
-  } else {
+router.get('/profile',protectedRoute,(req, res) => {
+  
     // Render profile page with user data
-    res.render('users/submit_ticket', { user: req.user }); // Pass req.user to the view
-  }
+    res.render('users/submit_ticket'); // Pass req.user to the view
+
 });
 router.post('/logout', authControllers.logout);
 module.exports = router;
