@@ -1,20 +1,25 @@
 // src/controllers/users/authControllers.js
-
 const axios = require('axios');
-
 require('dotenv').config();
-
-const { submitTicket } = require('./submit_ticketControllers');
 
 exports.login = async (req, res) => {
     try {
         const { username, password } = req.body;
         const deviceId = req.headers['user-agent'];
 
+        console.log('Received login request');
+        console.log('Username:', username);
+        console.log('Password:', password);
+        console.log('Device ID:', deviceId);
+
+        // Validate input
         if (!username || !password) {
+            console.log('Missing username or password');
             return res.status(400).json({ error: 'Username and password are required' });
         }
 
+        // Make API request
+        console.log('Sending login request to external API');
         const response = await axios.post('https://api-v2.gamota.com/game/login', null, {
             params: {
                 username,
@@ -24,24 +29,47 @@ exports.login = async (req, res) => {
             }
         });
 
+        console.log('Received response from external API');
+        console.log('Response status:', response.status);
+        console.log('Response data:', response.data);
+
+        // Handle response
         if (response.status === 200 && response.data && response.data.data) {
             const { access_token } = response.data.data;
 
+            console.log('Login successful, setting session data');
+            // Store user data in session
             req.session.userData = {
-                access_token: access_token,
-                username: username
+                access_token,
+                username
             };
-            
+            console.log('Session data set:', req.session.userData);
+            // Redirect to the ticket submission page
+            console.log('Redirecting to submit_ticket');
             return res.redirect('submit_ticket');
-            // return res.status(200).json({ message: 'Login successful' });
         } else {
+            console.log('Authentication failed');
             return res.status(401).json({ error: 'Authentication failed' });
         }
     } catch (error) {
         console.error('Login error:', error.message);
-        return res.status(500).json({ error: 'Internal server error' });
+
+        // Handle specific axios errors
+        if (error.response) {
+            // Server responded with a status other than 2xx
+            console.error('Response error data:', error.response.data);
+            return res.status(error.response.status).json({ error: error.response.data });
+        } else if (error.request) {
+            // Request was made but no response received
+            console.error('No response received:', error.request);
+            return res.status(500).json({ error: 'No response from authentication server' });
+        } else {
+            // Something happened in setting up the request
+            return res.status(500).json({ error: 'Internal server error' });
+        }
     }
 };
+
 // const checkAndRefreshToken = (token) => {
 //     if (!token) {
 //         return null;

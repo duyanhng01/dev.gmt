@@ -6,32 +6,32 @@ require('dotenv').config();
 const LocalStrategy = require('passport-local').Strategy;
 const { findUserByUsername, validatePassword } = require('../models/user');
 
-passport.use(new LocalStrategy(
-    async (username, password, done) => {
+// passport.use(new LocalStrategy(
+//     async (username, password, done) => {
    
-        const deviceId = req.headers['user-agent'];
+//         const deviceId = req.headers['user-agent'];
 
-        if (!username || !password) {
-            return res.status(400).json({ error: 'Username and password are required' });
-        }
-        try {
-            const response = await axios.post(GAMOTA_API_KEY, {
-                username,
-                password,
-                device_id: deviceId
-            });
+//         if (!username || !password) {
+//             return res.status(400).json({ error: 'Username and password are required' });
+//         }
+//         try {
+//             const response = await axios.post(GAMOTA_API_KEY, {
+//                 username,
+//                 password,
+//                 device_id: deviceId
+//             });
 
-            if (response.data.success) {
-                const user = response.data.user;
-                return done(null, user);
-            } else {
-                return done(null, false, { message: response.data.message });
-            }
-        } catch (err) {
-            return done(err);
-        }
-    }
-));
+//             if (response.data.success) {
+//                 const user = response.data.user;
+//                 return done(null, user);
+//             } else {
+//                 return done(null, false, { message: response.data.message });
+//             }
+//         } catch (err) {
+//             return done(err);
+//         }
+//     }
+// ));
 
 
 
