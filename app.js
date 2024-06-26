@@ -1,67 +1,45 @@
 const express = require('express');
-const app = express();
-const cors = require('cors');
-const axios = require('axios'); 
+const session = require('express-session');
 const path = require('path');
+const dotenv = require('dotenv');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
-const session = require('express-session');
-const passport = require('./src/config/passport'); // Ensure this is the correct path to your passport config
-const authRoutes = require('./src/routes/authRoutes');
-const ticket = require('./src/routes/ticket');
-const authControllers = require('./src/controllers/users/authControllers');
-const sessionMiddleware = require('./src/middleware/sessionMiddleware');
-const checkSession = require('./src/middleware/sessionMiddleware'); // Assuming sessionMiddleware.js is in the same directory
+const usersRouter = require('./src/routes/users');
+const indexRouter = require('./src/routes/index');
+const adminRoutes = require('./src/routes/admin')
+const checkSession = require('./src/middleware/sessionMiddleware');
+const config =require('./src/config/monggo')
+dotenv.config();
+mongoose.connect(config.mongoURI)
+.then(() => console.log('Đã kết nối đến MongoDB'))
+.catch(err => console.error('Lỗi kết nối đến MongoDB:', err));
 
-// Example route that requires session authentication
+const app = express();
 
+// Middleware
 
-
-require('dotenv').config(); // Load environment variables
-app.use(cors());
-app.set('view engine', 'ejs');
-app.set('views', path.join(__dirname, 'src/views'));
-
-app.use(session({ secret: process.env.SESSION_SECRET, resave: false, saveUninitialized: true }));
-app.use(passport.initialize());
-app.use(passport.session());
 app.use(express.static(path.join(__dirname, 'public')));
-app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
-app.get('/', (req, res) => {
-    res.render('users/index');  
-});
+// Session middleware
+app.use(session({
+    secret: process.env.SESSION_SECRET,
+    resave: false,
+    saveUninitialized: true
+   
+}));
 
-app.get('/login', (req, res) => {
-    res.render('users/login');
-});
+// View engine setup (assuming you're using EJS)
+app.set('views', path.join(__dirname, 'src/views'));
+app.set('view engine', 'ejs');
 
-app.get('/submit_ticket', async (req, res) => {
-    try {
-        const response = await axios.get('https://nap.gamota.com/games/support/list-game');
-        const games = response.data.data;
-        res.render('users/submit_ticket', { games });
-    } catch (error) {
-        console.error('Lỗi khi gọi API:', error);   
-        res.status(500).send('Đã xảy ra lỗi khi lấy dữ liệu từ API.');
-    }
-});
-
-app.get('/submit_ticket', (req, res) => {
-    res.render('users/submit_ticket');
-});
-app.use('/submit_ticket', ticket);
-app.use('/', authRoutes);
-
-mongoose.connect('mongodb://localhost:27017/mydatabase')
-    .then(() => {
-        console.log('Connected to MongoDB');
-    })
-    .catch((error) => {
-        console.error('Error connecting to MongoDB:', error);
-    });
-
+// Routes
+app.use(checkSession);
+app.use('/', usersRouter);
+app.use('/', indexRouter);
+app.use('/', adminRoutes);
+// Start server
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
