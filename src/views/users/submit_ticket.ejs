@@ -32,7 +32,11 @@
             <label for="game" class="block mb-2">Chọn game:</label>
             <select id="game" name="game" required class="w-full px-4 py-2 border rounded-md">
                 <% games.forEach(game => { %>
-                    <option value="<%= game.api_key %>"><%= game.gameName %></option>
+                    <option value="<%= game.api_key %>">
+                  
+                       
+                        <%= game.gameName %>
+                    </option>
                 <% }); %>
             </select>
         </div>
@@ -42,7 +46,7 @@
                 <div class="mb-4">
                     <label for="server" class="block mb-2">Chọn server:</label>
                     <select id="server" name="server" required class="w-full px-4 py-2 border rounded-md">
-                        <!-- Add server options here -->
+                        <select id="game" name="game" required class="w-full px-4 py-2 border rounded-md"> 
                     </select>
                 </div>
                 <div class="mb-4">

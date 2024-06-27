@@ -61,6 +61,7 @@ app.get('/submit_ticket', async (req, res) => {
     try {
         const response = await axios.get('https://nap.gamota.com/games/support/list-game');
         const games = response.data.data;
+        // var gameID = game_id;
         res.render('users/submit_ticket', { games });
     } catch (error) {
         console.error('Lỗi khi gọi API:', error);   
