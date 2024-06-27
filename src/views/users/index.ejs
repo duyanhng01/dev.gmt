@@ -1,4 +1,20 @@
 <%- include('./partial/head', { title: 'gamota Customer Support' }) %>
 <%- include('./partial/header') %>
-<%- include('./partial/main') %>
+
+<div class="flex grid-cols-3 gap-4">
+    <div class="col-span-1 flex items-center justify-center mx-2 rounded-lg p-4">
+        <%- include('./pages/faqAccount') %>
+    </div>
+    
+    <div class="col-span-1 flex items-center justify-center mx-2  rounded-lg p-4">
+        <%- include('./pages/faqGame') %>
+    </div>
+    
+    <div class="col-span-1 flex items-center justify-center mx-2   rounded-lg p-4">
+        <%- include('./pages/faqPayment') %>
+    </div>
+</div>
+
+
+
 <%- include('./partial/footer') %>
