@@ -12,6 +12,7 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
+    "@ckeditor/ckeditor5-build-classic": "^42.0.0",
     "@faker-js/faker": "^8.4.1",
     "axios": "^1.7.2",
     "bcrypt": "^5.1.1",

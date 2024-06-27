@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const authControllers = require('../controllers/users/authControllers');
+const authControllers = require('../controllers/authControllers');
 const keepLogin =  require('../middleware/keepLoginMiddleware');
 
 router.get('/login', keepLogin , (req, res) => {

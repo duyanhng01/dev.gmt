@@ -1,0 +1,67 @@
+<div class="bg-white p-4 rounded shadow-md mb-6">
+    <h3 class="text-xl mb-2">Add New FAQ</h3>
+    <form>
+        <div class="mb-4">
+            <label class="block text-gray-700 text-sm font-bold mb-2" for="question">Question</label>
+            <textarea name="question" id="question" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 ckeditor-trigger" placeholder="Enter the question"></textarea>
+        </div>
+        <div class="mb-4">
+            <label class="block text-gray-700 text-sm font-bold mb-2" for="answer">Answer</label>
+            <textarea name="answer" id="answer" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 ckeditor-trigger" placeholder="Enter the answer"></textarea>
+        </div>
+        <div class="mb-4">
+            <label class="block text-gray-700 text-sm font-bold mb-2" for="category">Category</label>
+            <textarea name="category" id="category" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 ckeditor-trigger" placeholder="Enter the category"></textarea>
+        </div>
+        <div class="mb-4">
+            <label class="block text-gray-700 text-sm font-bold mb-2" for="time">Time</label>
+            <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700" id="time" type="datetime-local">
+        </div>
+    </form>
+</div>
+
+<!-- CKEditor script -->
+<script src="https://cdn.ckeditor.com/ckeditor5/34.0.0/classic/ckeditor.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        let editors = [];
+
+        function initializeCKEditor(elementId) {
+            let editor = ClassicEditor
+                .create(document.getElementById(elementId))
+                .catch(error => {
+                    console.error(error);
+                });
+            editors.push(editor);
+        }
+
+        document.querySelectorAll('.ckeditor-trigger').forEach((textarea) => {
+            textarea.addEventListener('focus', function() {
+                initializeCKEditor(textarea.id);
+            });
+        });
+
+        // Function to destroy all CKEditors
+        function destroyAllEditors() {
+            editors.forEach(editor => {
+                editor.destroy().then(() => {
+                    editor = null;
+                }).catch(error => {
+                    console.error(error);
+                });
+            });
+            editors = [];
+        }
+
+        // Example close button to destroy CKEditor instances
+        const closeButton = document.createElement('button');
+        closeButton.innerText = 'Close CKEditor';
+        closeButton.addEventListener('click', function() {
+            destroyAllEditors();
+        });
+
+        // Append the close button wherever you want (example below appends to the form)
+        const form = document.querySelector('form');
+        form.appendChild(closeButton);
+    });
+</script>

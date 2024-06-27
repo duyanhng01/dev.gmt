@@ -3,19 +3,86 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>test</title>
+    <title>Admin Panel</title>
+    <!-- Tailwind CSS CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 </head>
+<body class="bg-gray-100 font-sans leading-normal tracking-normal">
 
-<header>
-    <div class="container mx-auto px-4">
-        <div class="flex flex-nowrap">
-  <div>1</div>
-  <div>2</div>
-  <div>3</div>
-</div>
-      </div>
-</header>
-<body>
-    
+    <!-- Header -->
+    <header class="bg-blue-500 text-white p-4">
+        <h1 class="text-center text-2xl">Admin Panel</h1>
+    </header>
+
+    <div class="flex">
+
+        <!-- Sidebar -->
+        <aside class="bg-blue-800 text-white w-64 min-h-screen p-4">
+            <nav class="space-y-4">
+                <a href="#" class="block py-2 px-3 rounded hover:bg-blue-600">Dashboard</a>
+                <a href="#" class="block py-2 px-3 rounded hover:bg-blue-600">FAQ Management</a>
+                <a href="#" class="block py-2 px-3 rounded hover:bg-blue-600">Ticket Management</a>
+                <a href="#" class="block py-2 px-3 rounded hover:bg-blue-600">Logout</a>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="flex-1 p-6">
+            <h2 class="text-2xl font-bold mb-4">FAQ Management</h2>
+            <div class="bg-white p-4 rounded shadow-md mb-6">
+                <h3 class="text-xl mb-2">Add New FAQ</h3>
+                <form>
+                    <div class="mb-4">
+                        <label class="block text-gray-700 text-sm font-bold mb-2" for="question">Question</label>
+                        <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700" id="question" type="text" placeholder="Enter the question">
+                    </div>
+                    <div class="mb-4">
+                        <label class="block text-gray-700 text-sm font-bold mb-2" for="answer">Answer</label>
+                        <textarea class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700" id="answer" placeholder="Enter the answer"></textarea>
+                    </div>
+                    <div class="mb-4">
+                        <label class="block text-gray-700 text-sm font-bold mb-2" for="category">Category</label>
+                        <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700" id="category" type="text" placeholder="Enter the category">
+                    </div>
+                    <div class="mb-4">
+                        <label class="block text-gray-700 text-sm font-bold mb-2" for="time">Time</label>
+                        <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700" id="time" type="datetime-local">
+                    </div>
+                    <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" type="button">Add FAQ</button>
+                </form>
+            </div>
+
+            <h2 class="text-2xl font-bold mb-4">Ticket Management</h2>
+            <div class="bg-white p-4 rounded shadow-md">
+                <h3 class="text-xl mb-2">Tickets</h3>
+                <table class="min-w-full bg-white">
+                    <thead>
+                        <tr>
+                            <th class="py-2">Ticket ID</th>
+                            <th class="py-2">User</th>
+                            <th class="py-2">Issue</th>
+                            <th class="py-2">Category</th>
+                            <th class="py-2">Time</th>
+                            <th class="py-2">Status</th>
+                            <th class="py-2">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="py-2">1</td>
+                            <td class="py-2">User1</td>
+                            <td class="py-2">Login issue</td>
+                            <td class="py-2">Technical</td>
+                            <td class="py-2">2024-06-27 14:00</td>
+                            <td class="py-2">Open</td>
+                            <td class="py-2"><button class="bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-3 rounded">Close</button></td>
+                        </tr>
+                        <!-- Add more tickets as needed -->
+                    </tbody>
+                </table>
+            </div>
+        </main>
+    </div>
+
 </body>
 </html>
