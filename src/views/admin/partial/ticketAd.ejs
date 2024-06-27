@@ -1,28 +1,50 @@
+
 <div class="bg-white p-4 rounded shadow-md">
     <h3 class="text-xl mb-2">Tickets</h3>
-    <table class="min-w-full bg-white">
-        <thead>
-            <tr>
-                <th class="py-2">Ticket ID</th>
-                <th class="py-2">User</th>
-                <th class="py-2">Issue</th>
-                <th class="py-2">Category</th>
-                <th class="py-2">Time</th>
-                <th class="py-2">Status</th>
-                <th class="py-2">Action</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td class="py-2">1</td>
-                <td class="py-2">User1</td>
-                <td class="py-2">Login issue</td>
-                <td class="py-2">Technical</td>
-                <td class="py-2">2024-06-27 14:00</td>
-                <td class="py-2">Open</td>
-                <td class="py-2"><button class="bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-3 rounded">Close</button></td>
-            </tr>
-            <!-- Add more tickets as needed -->
-        </tbody>
-    </table>
+    <div class="overflow-x-auto">
+        <table class="min-w-full bg-white">
+            <thead class="bg-gray-100">
+                <tr>
+                    <th class="py-2 px-4 text-left">ID</th>
+                    <th class="py-2 px-4 text-left">Tên phiếu</th>
+                    <th class="py-2 px-4 text-left">Game</th>
+                    <th class="py-2 px-4 text-left">Gán cho</th>
+                    <th class="py-2 px-4 text-left">Trạng thái</th>
+                    <th class="py-2 px-4 text-left">Ưu tiên</th>
+                    <th class="py-2 px-4 text-left">Source</th>
+                    <th class="py-2 px-4 text-left">Ngày tạo</th>
+                    <th class="py-2 px-4 text-left">#</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="border-b">
+                    <td class="py-2 px-4"></td>
+                    <td class="py-2 px-4">Lỗi tài khoản :: 41029 - Mô tả chi tiết lỗi gặp phải </td>
+                    <td class="py-2 px-4"></td>
+                    <td class="py-2 px-4"></td>
+                    <td class="py-2 px-4">
+                        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
+                            Đóng
+                        </span>
+                    </td>
+                    <td class="py-2 px-4">
+                        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-800">
+                          
+                        </span>
+                    </td>
+                    <td class="py-2 px-4">Web</td>
+                    <td class="py-2 px-4">27-06-2024 14:47:56</td>
+                    <td class="py-2 px-4 flex space-x-2">
+                        <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 rounded">
+                            Edit
+                        </button>
+                        <button class="bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-2 rounded">
+                            Delete
+                        </button>
+                    </td>
+                </tr>
+                <!-- Add more tickets as needed -->
+            </tbody>
+        </table>
+    </div>
 </div>
